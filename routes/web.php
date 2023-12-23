@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminUsersController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +28,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
 });
 
 require __DIR__.'/auth.php';
 
 Route::get('/admin', [AdminController::class, 'index'])->middleware('auth')->name('admin');
+
 Route::get('/admin/users', [AdminUsersController::class, 'index'])->middleware('auth')->name('admin-users');
+
 Route::get('/admin/users/create', [AdminUsersController::class, 'create'])->middleware('auth')->name('admin-users-create');
+
 Route::post('/admin/users/create', [AdminUsersController::class, 'store'])->middleware('auth')->name('admin-users-create');
